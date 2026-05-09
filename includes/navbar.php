@@ -1,3 +1,7 @@
+<?php @session_start();?>
+<?php include "./includes/conect.php";?>
+
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top px-4">
     <div class="container-fluid">
         <a class="navbar-brand logo-link" href="index.php">
@@ -9,39 +13,52 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link " href="./index.php">Home</a>
+                    <a class="nav-link " href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Products</a>
+                    <a class="nav-link" href="display_all.php">Products</a>
                 </li>
+            <?php if(isset($_SESSION['username']) && $_SESSION['username']){?>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">My Acount</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Logout</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="mycart.php" class="nav-link">
                         <i class=" fa-solid fa-cart-shopping"></i>
-                        <sup>0</sup>
+                        <sup><?=mysqli_num_rows(mysqli_query($con, "SELECT * FROM cart where username = '$_SESSION[username]'"));?></sup>
                     </a>
                 </li>
+                <?php }?>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Total : $0/- </a>
                 </li>
             </ul>
             <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search products ...." style="min-width: 200px;" aria-label="Search" />
+                <input class="form-control me-2" type="search" placeholder="Search products ...." style="min-width: 200px; " aria-label="Search" />
                 <button class="btn btn-custom" type="submit">
                     <i class="fas fa-search"></i>
                 </button>
             </form>
+            <?php if(isset($_SESSION['username']) && $_SESSION['username']){?>
+                <ul class="mb-0" >
+                    <li class="nav-item" style="list-style:none">
+                        <a class="nav-link" href="My-Acount.php">
+                            <!-- i this -->
+                            <?php 
+                            $user = substr(strtoupper($_SESSION['username']), 0, 1);
+                            echo "<div class='logo-login'>$user</div>";
+                            ?>
+                        </a>
+                    </li>
+                </ul>
+                
+            <?php }else{?>
+                        <ul class="mb-0">
+                    <li class="nav-item" style="list-style:none">
+                        <a class="btn btn-primary" href="My-Acount.php">
+                            LOGIN
+                        </a>
+                    </li>
+                </ul>
+                <?php }?>
+
         </div>
     </div>
 </nav>

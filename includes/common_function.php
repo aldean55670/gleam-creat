@@ -10,6 +10,7 @@ function get_occasion()
         echo "<li class='nav-item'><a href='index.php?occasion=$occassion_id' class='nav-link'>$occassion_title</a></li>";
     }
 }
+
 function get_gift_categories()
 {
     global $con;
@@ -25,6 +26,44 @@ function get_gift_categories()
 function get_product()
 {
     global $con;
+    $select_product = "SELECT products.*, gift_categories.category_title, occasion.occasion_title FROM `products` LEFT JOIN `gift_categories` ON products.category_id = gift_categories.category_id LEFT JOIN `occasion` ON products.occasion_id = occasion.occasion_id;";
+    $result_product = mysqli_query($con, $select_product);
+    while ($row = mysqli_fetch_assoc($result_product)) {
+        $product_id = $row['product_id'];
+        $product_title = $row['product_title'];
+        $product_description = $row['product_description'];
+        $product_image1 = $row['product_image1'];
+        $product_price = $row['product_price'];
+        $product_category = $row['category_title'];
+        $product_occasion = $row['occasion_title'];
+
+        if (isset($_GET['occasion']) || isset($_GET['category'])) return;
+        echo "
+            <div class='card smothy'>
+                <img src= 'images/$product_image1' alt='Product Image' class='card-img-top '>
+                <div class='card-body'>
+                    <h5 class='card-title'>$product_title</h5>
+                    <p class='card-text'>" . substr($product_description, 0, 30) . "</p>
+                    <p class='card-text'> $product_category </p>
+                    <p class='card-text'> $product_occasion </p>
+
+                    <div class='card-price'>Price : $product_price <span>EGP</span></div>
+                    <a 
+                        class='btn btn-primary' add-to-cart data-product-id=$product_id>
+                        <i class='fas fa-cart-plus me-2' style='color: white;'></i>Add To Cart
+                    </a>
+                    <a href='product_details.php?product_id=$product_id'  class='btn'>
+                        <i class='fas fa-eye me-2 ' style='color: black;'></i>view
+                    </a>
+                </div>
+            </div>
+            ";
+    }
+}
+
+function get_all_product()
+{
+    global $con;
     $select_product = "SELECT * FROM `products` ORDER BY RAND()";
     $result_product = mysqli_query($con, $select_product);
     while ($row = mysqli_fetch_assoc($result_product)) {
@@ -35,21 +74,20 @@ function get_product()
         $product_price = $row['product_price'];
 
         if (isset($_GET['occasion']) || isset($_GET['category'])) return;
-        echo "
-            <div class='card'>
+        echo "<div class='card smothy'>
                 <img src= 'images/$product_image1' alt='Product Image' class='card-img-top '>
                 <div class='card-body'>
                     <h5 class='card-title'>$product_title</h5>
                     <p class='card-text'>" . substr($product_description, 0, 30) . "</p>
-                    <div class='card-price'>Price : $product_price <span>E.G.P</span></div>
+                    <div class='card-price'>Price : $product_price <span>EGP</span></div>
                     <a href='index.php?add_to_cart=$product_id' 
-                        class='btn btn-primary'  style='background-color:blueviolet;'>
+                        class='btn btn-primary  add-to-cart '  blueviolet data-id=$product_id>
                         <i class='fas fa-cart-plus me-2' style='color: white;'></i>Add To Cart
                     </a>
-                    <a href='product_details.php?
-                        product_id=$product_id'  class='btn'>
-                        <i class='fas fa-eye me-2 ' style='color: black;'></i>view
+                    <a href='product_details.php' class='btn'>
+                        <i class='fas fa-eye me-2' style='color: black;'></i> view
                     </a>
+                    
                 </div>
             </div>
             ";
@@ -71,18 +109,17 @@ function get_uniqe_category()
             $product_image1 = $row['product_image1'];
             $product_price = $row['product_price'];
             echo "
-                    <div class='card'>
+                    <div class='card smothy'>
                         <img src= 'images/$product_image1' alt='Product Image' class='card-img-top '>
                         <div class='card-body'>
                             <h5 class='card-title'>$product_title</h5>
                             <p class='card-text'>" . substr($product_description, 0, 30) . "</p>
-                            <div class='card-price'>Price : $product_price <span>E.G.P</span></div>
+                            <div class='card-price'>Price : $product_price <span>EGP</span></div>
                             <a href='index.php?add_to_cart=$product_id' 
-                                class='btn btn-primary'  style='background-color:blueviolet;'>
+                                class='btn btn-primary  add-to-cart'  blueviolet data-id=$product_id'>
                                 <i class='fas fa-cart-plus me-2' style='color: white;'></i>Add To Cart
                             </a>
-                            <a href='product_details.php?
-                                product_id=$product_id'  class='btn'>
+                            <a href='product_details.php?product_id=$product_id'  class='btn'>
                                 <i class='fas fa-eye me-2 ' style='color: black;'></i>view
                             </a>
                         </div>
@@ -109,13 +146,14 @@ function get_uniqe_occasion()
 
             if (isset($_GET['occasion'])) {
                 echo "
-                    <div class='card'>
+                    <div class='card smothy'>
                         <img src='images/$product_image1' alt='Product Image' class='card-img-top '>
                         <div class='card-body'>
                             <h5 class='card-title'>$product_title</h5>
                             <p class='card-text'>" . substr($product_description, 0, 30) . "</p>
-                            <div class='card-price'>Price : $product_price <span>E.G.P</span></div>
-                            <a href='index.php?add_to_cart=$product_id' class='btn btn-primary' style='background-color:blueviolet;'>
+                            <div class='card-price'>Price : $product_price <span>EGP</span></div>
+                            <a href='index.php?add_to_cart=$product_id' 
+                                class='btn btn-primary  add-to-cart'  data-id=$product_id>
                                 <i class='fas fa-cart-plus me-2' style='color: white;'></i>Add To Cart
                             </a>
                             <a href='product_details.php?
@@ -129,3 +167,42 @@ function get_uniqe_occasion()
         }
     }
 }
+function get_product_view()
+{
+    global $con;
+    $prodect_id = $_GET['product_id'];
+    $select_product = "SELECT * FROM `products` WHERE product_id=$prodect_id";
+    $result_product = mysqli_query($con, $select_product);
+    $row = mysqli_fetch_assoc($result_product);
+    if (!$row) return false;
+    $product_id = $row['product_id'];
+    $product_title = $row['product_title'];
+    $product_description = $row['product_description'];
+    $product_image1 = $row['product_image1'];
+    $product_price = $row['product_price'];
+    $result = "
+        <div class='container'>
+            <div class='view_product'>
+                <img src= 'images/$product_image1' class=' width500 rounded mx-auto d-block' alt='Responsive image' '>
+                <div class=''>
+                    <h5 class='text-center >$product_title</h5>
+                    <div class='container_view_product'>
+                        <p class=' alert alert-info'> $product_description</p>
+                        <div class='text-center alert alert-'>Price : $product_price <span class='red'>EGP</span></div>
+                    <a href='index.php?add_to_cart=$product_id' 
+                        class='btn btn-primary w-100  add-to-cart'   data-id=$product_id>
+                        <i class='fas fa-cart-plus me-2' style='color: white;'></i>BUY NOW
+                    </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+            ";
+    return $result;
+}
+
+
+
+
+
+
