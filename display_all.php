@@ -14,7 +14,7 @@
         <div class="hero-banner">Find The Perfect Gift For Every Occasion!</div>
     </div>
     <div class="container-cards container">
-        <div class="row">
+        <div class="row">  
             <div>
                 <h4>Occasion</h4>
                 <ul class="navebar-nav">
