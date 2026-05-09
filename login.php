@@ -5,6 +5,7 @@ $page_title = "login";
 include('includes/header.php');
 include('includes/navbar.php');
 include('includes/conect.php');
+
 if ($_POST) {
     global $con;
     $username = htmlspecialchars($_POST['username'], ENT_QUOTES);
