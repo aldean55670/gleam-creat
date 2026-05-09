@@ -1,5 +1,9 @@
 <?php @session_start();?>
-<?php include "./includes/conect.php";?>
+<?php include "./includes/conect.php";
+
+$res = mysqli_query($con, "SELECT SUM(price) as total FROM cart where username = '$_SESSION[username]'");
+$row = mysqli_fetch_assoc($res);
+?>
 
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top px-4">
@@ -27,7 +31,7 @@
                 </li>
                 <?php }?>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Total : $0/- </a>
+                    <a class="nav-link" href="#">Total : $<?= $row['total'];?>/- </a>
                 </li>
             </ul>
             <form class="d-flex" role="search">

@@ -12,7 +12,7 @@ if(!isset($_SESSION['username'])){
 }
 
 $username = $_SESSION['username'];
-$query = "SELECT product_title , price,image
+$query = "SELECT product_title , price,image,id
             FROM cart 
             WHERE username = '$username' ";
 $result_show = mysqli_query($con,$query);
@@ -35,22 +35,20 @@ $result_show = mysqli_query($con,$query);
             </thead>
             <tbody>
             <?php while ($row = mysqli_fetch_assoc($result_show)) { ?>
-                <tr>
+                <tr data-id = "<?= $row['id'] ;?>">
                     <td>
-                        <img src="./images/<?= $row['image']; ?>"
+                        <img src="./images/<?= $row['image'];?>"
                             width="70"
                             class="rounded">
                     </td>
                     <td><?= $row['product_title']; ?></td>
                     <td><?= $row['price']; ?></td>
-                    <td>12</td>
+                    <td>1</td>
                     <td>3</td>
                     <td>
-                        <a href="#" class="btn btn-primary btn-sm">
-                            Edit
-                        </a>
-                        <a href="#" class="btn btn-danger btn-sm">
-                            Delete
+                        <a href="#" class="btn" data-id = "<?= $row['id'] ;?>" >
+                            
+                            <i class="fa-solid fa-trash" style="color: #ff0000;"></i>
                         </a>
                     </td>
                 </tr>
@@ -61,3 +59,12 @@ $result_show = mysqli_query($con,$query);
 </div>
 </body>
 </html>
+                            <!-- <script>
+                                    $(document).ready(fnction(){
+                                        $('[data-id]').click(function(){
+                                            <?php
+                                                $query="DELETE FROM cart WHERE [data-id] = '$row[id]'";
+                                                ?>
+                                        })
+                                    })
+                            </script> -->

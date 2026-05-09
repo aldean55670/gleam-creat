@@ -1,8 +1,7 @@
 <?php
- include("includes/header.php"); 
+    include("includes/header.php"); 
     include("includes/conect.php");
     include("includes/common_function.php");
-
 ?>
 <script>
     document.title = 'Gleam - creats - Home'
