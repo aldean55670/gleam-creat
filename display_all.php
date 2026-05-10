@@ -37,23 +37,55 @@
 
     <?php include("includes/footer.php") ?>
     </body>
+<!-- ADD TO CART  -->
     <script>
-        <?php ?>
-        let productID = <?= isset($_GET['add_to_cart']) ? (int)$_GET['add_to_cart'] : die() ?>;
         $(document).ready(function() {
-            $('.add-to-cart').click(function(e) {
+            $('[add-to-cart]').click(function(e) {
                 e.preventDefault();
+                let productID = $(this).data('product-id');
                 $.ajax({
-                    url: 'cart.php',
-                    method: 'get',
+                    url: 'requests/cart.php',
+                    method: 'GET',
                     data: {
                         product_id: productID
                     },
                     success: function(data) {
-                        console.log('sucsess');
+                        let contnet = `
+                        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                            <div id="liveToast" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="alert alert-success d-flex justify-content-between gap-3">
+                                    <div>${data.message}</div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                        $('body').append(contnet);
+
+                        let toast = new bootstrap.Toast(document.getElementById('liveToast'));
+                        toast.show();
+                        let v = $('#count').text();
+                        v = Number(v) + 1;
+                        $('#count').text(v);  
+                        console.log('succsess');
                     },
                     error: function(error) {
-                        consol.log(error)
+                        console.log(error)
+                        let contnet = `
+                        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                            <div id="liveToast" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="alert alert-danger d-flex justify-content-between gap-3">
+                                    <div>${error.responseJSON.message}</div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                        $('body').append(contnet);
+
+                        let toast = new bootstrap.Toast(document.getElementById('liveToast'));
+                        toast.show();
+                        console.log(error)
                     }
                 })
             })

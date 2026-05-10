@@ -37,7 +37,9 @@ if(isset($_GET['product_id'])){
         $res = mysqli_query($con, $query);
         if (mysqli_affected_rows($con) > 0) {
             $result_chick = ['success' => true, 'message' => 'Product add to cart successfully'];
-    
+    if(!$res){
+    die(mysqli_error($con));
+}
             } else {
             header('HTTP/1.1 404 Not Found');
             $result_chick = ['success' => false, 'message' => 'Failed to add product to cart'];
@@ -51,7 +53,6 @@ if(isset($_GET['product_id'])){
     echo json_encode($result_chick);
     exit;
 }
-
 
 
 

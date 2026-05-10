@@ -37,7 +37,7 @@
     </div>
 
     <?php include("includes/footer.php"); ?>
-
+<!-- ADD TO CART  -->
     <script>
         $(document).ready(function() {
             $('[add-to-cart]').click(function(e) {
@@ -63,6 +63,9 @@
 
                         let toast = new bootstrap.Toast(document.getElementById('liveToast'));
                         toast.show();
+                        let v = $('#count').text();
+                        v = Number(v) + 1;
+                        $('#count').text(v);  
                     },
                     error: function(error) {
                         console.log(error)
