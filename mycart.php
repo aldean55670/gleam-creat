@@ -65,7 +65,7 @@
                 let id = $(this).data('id');
                 let item = $(this).closest('tr');
                 $.ajax({
-                    url:"delet_to_catr.php",
+                    url:"delete_from_cart.php",
                     method:'post',
                     dataType:'json',
                     data:{
@@ -81,7 +81,7 @@
                     error: function(xhr,status,error){
                         console.log(xhr.responseText);
                         console.log(status);
-                        console.log(error);
+                        console.log('error');
                     }
                 })
             })

@@ -41,7 +41,6 @@
     <script>
         $(document).ready(function() {
             $('[add-to-cart]').click(function(e) {
-                e.preventDefault();
                 let productID = $(this).data('product-id');
                 $.ajax({
                     url: 'requests/cart.php',
@@ -62,14 +61,11 @@
                         </div>
                         `;
                         $('body').append(contnet);
+                        $('sup').text(data.count)
+                        $('#total-price').text(`${data.total ?? 0}`)
 
                         let toast = new bootstrap.Toast(document.getElementById('liveToast'));
                         toast.show();
-                        $('sup').text(data.count)
-                        $('#total-price').text(`${data.total ?? 0}`)
-                        
-                        
-
                     },
                     error: function(error) {
                         console.log(error)
@@ -77,7 +73,7 @@
                         <div class="toast-container position-fixed bottom-0 end-0 p-3">
                             <div id="liveToast" role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="alert alert-danger d-flex justify-content-between gap-3">
-                                    <div>${error.result_chick..message}</div>
+                                    <div>${error.result_chick.message}</div>
                                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                                 </div>
                             </div>

@@ -39,10 +39,9 @@ if(isset($_GET['product_id'])){
             $result_chick = ['success' => true, 'message' => 'Product add to cart successfully'];
 
         if(!$res){
-            
-        die(mysqli_error($con));
 
-}
+        die(mysqli_error($con));
+        }
             } else {
             header('HTTP/1.1 404 Not Found');
             $result_chick = ['success' => false, 'message' => 'Failed to add product to cart'];
