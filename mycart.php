@@ -57,7 +57,7 @@
         </div>
     </div>
 
-    <!-- DELETE BTN -->
+    <!-- DELETE FROM CART -->
     <script>
         $(document).ready(function(){
             $('[delete-item]').click(function(e){
@@ -65,33 +65,60 @@
                 let id = $(this).data('id');
                 let item = $(this).closest('tr');
                 $.ajax({
-                    url:"",
+                    url:"delet_to_catr.php",
                     method:'post',
+                    dataType:'json',
                     data:{
                         element_id: id
                     },
-                    success: function(){
-                        item.remove();
-                        let v = $('#count').text();
-                        v = Number(v) - 1;
-                        $('#count').text(v);   
+                    success: function(res){
+                        // console.log(res)
+                        item.remove()
+                        $('sup').text(res.count)
+                        $('#total-price').text(`${res.total ?? 0}`)
+                        console.log(res.total)
                     },
-                    error: function(){
-                        console.log('error')
+                    error: function(xhr,status,error){
+                        console.log(xhr.responseText);
+                        console.log(status);
+                        console.log(error);
                     }
                 })
             })
         })
     </script>
 
-    <?php
-    global $con;
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $element_id = $_POST['element_id'];
-        $query="DELETE FROM `cart` WHERE id = $element_id";
-        mysqli_query($con,$query);
-    }
-    ?>
-</body>
-</html>
 
+
+
+
+
+            
+    </body>
+    </html>
+                        <!-- let nav = $('nav');
+                        nav.html( `
+                            <div class="container-fluid">
+                                <a class="navbar-brand logo-link" href="index.php">
+                                    <i class="fa-brands fa-42-group"></i>
+                                </a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                        <li class="nav-item">
+                                            <a class="nav-link " href="index.php">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="display_all.php">Products</a>
+                                        </li>
+                                                    <li class="nav-item">
+                                            <a href="mycart.php" class="nav-link">
+                                                <i class=" fa-solid fa-cart-shopping"></i>
+                                                <sup id='count'><?= $row['count'];?></sup>
+                                            </a>
+                                        </li>
+                                            <li class="nav-item">
+                                <a class="nav-link" href="#">Total : $<?= $row['total']; ?>/- </a>
+                        `); -->

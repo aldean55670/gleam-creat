@@ -31,7 +31,7 @@ $row = mysqli_fetch_assoc($res);
                 </li>
                 <?php }?>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Total : $<?= $row['total'];?>/- </a>
+                    <a class="nav-link" href="#" class=''>Total : $ <span id="total-price"><?= $row['total'];?></span>/- </a>
                 </li>
             </ul>
             <form class="d-flex" role="search">

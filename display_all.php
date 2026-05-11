@@ -46,6 +46,7 @@
                 $.ajax({
                     url: 'requests/cart.php',
                     method: 'GET',
+                    dataType:'json',
                     data: {
                         product_id: productID
                     },
@@ -54,7 +55,7 @@
                         <div class="toast-container position-fixed bottom-0 end-0 p-3">
                             <div id="liveToast" role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="alert alert-success d-flex justify-content-between gap-3">
-                                    <div>${data.message}</div>
+                                    <div>${data.result_chick.message}</div>
                                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                                 </div>
                             </div>
@@ -64,10 +65,11 @@
 
                         let toast = new bootstrap.Toast(document.getElementById('liveToast'));
                         toast.show();
-                        let v = $('#count').text();
-                        v = Number(v) + 1;
-                        $('#count').text(v);  
-                        console.log('succsess');
+                        $('sup').text(data.count)
+                        $('#total-price').text(`${data.total ?? 0}`)
+                        
+                        
+
                     },
                     error: function(error) {
                         console.log(error)
@@ -75,7 +77,7 @@
                         <div class="toast-container position-fixed bottom-0 end-0 p-3">
                             <div id="liveToast" role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="alert alert-danger d-flex justify-content-between gap-3">
-                                    <div>${error.responseJSON.message}</div>
+                                    <div>${error.result_chick..message}</div>
                                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                                 </div>
                             </div>

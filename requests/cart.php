@@ -37,8 +37,11 @@ if(isset($_GET['product_id'])){
         $res = mysqli_query($con, $query);
         if (mysqli_affected_rows($con) > 0) {
             $result_chick = ['success' => true, 'message' => 'Product add to cart successfully'];
-    if(!$res){
-    die(mysqli_error($con));
+
+        if(!$res){
+            
+        die(mysqli_error($con));
+
 }
             } else {
             header('HTTP/1.1 404 Not Found');
@@ -48,9 +51,21 @@ if(isset($_GET['product_id'])){
         header('HTTP/1.1 404 Not Found');
         $result_chick = ['success' => false, 'message' => 'Product not found'];
     }
-    
+
+    $query2 = "SELECT COUNT(*)  as count, SUM(price) as total
+            FROM cart
+            WHERE username = '$username'";
+
+    $result = mysqli_query($con, $query2);
+    $row = mysqli_fetch_assoc($result);
+
     header('Content-type: application/json');
-    echo json_encode($result_chick);
+    echo json_encode([
+            'result_chick' => $result_chick,
+        'success' => true,
+        'count' => $row['count'],
+        'total' => $row['total']
+    ]);
     exit;
 }
 
