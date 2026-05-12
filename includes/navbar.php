@@ -35,11 +35,13 @@ $row = mysqli_fetch_assoc($res);
                 </li>
             </ul>
             <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search products ...." style="min-width: 200px; " aria-label="Search" />
+                <input class="form-control me-2" id="search" type="search" placeholder="Search products ...." style="min-width: 200px; " aria-label="Search" />
                 <button class="btn btn-custom" type="submit">
                     <i class="fas fa-search"></i>
                 </button>
             </form>
+
+            <!-- icon sign in  -->
             <?php if(isset($_SESSION['username']) && $_SESSION['username']){?>
                 <ul class="mb-0" >
                     <li class="nav-item" style="list-style:none">
@@ -62,7 +64,6 @@ $row = mysqli_fetch_assoc($res);
                     </li>
                 </ul>
                 <?php }?>
-
         </div>
     </div>
 </nav>

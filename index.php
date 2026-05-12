@@ -37,10 +37,63 @@
     </div>
 
     <?php include("includes/footer.php"); ?>
-<!-- ADD TO CART  -->
+
+<!-- SEARCH  -->
+    <script>
+        $(document).ready(function() {  
+            let parentcard = $('#data').text() 
+            
+            $('#search').on('input',function() {
+            $.ajax({
+                url: './search.php',
+                method: 'post',
+                dataType:'json',
+                data:{
+                    keyword: $('#search').val()
+                },
+                success: function(res){//data-count
+                    console.log('success');
+                    if(res.count > 0){
+                        $('#data').text('');
+                        let content ='';
+                        res.data.forEach(function(item, index){
+                            console.log(item.product_id)
+                            content += ` 
+                                    <div class='card smothy'>
+                                        <img src= 'images/${item.product_image1}' alt='Product Image' class='card-img-top '>
+                                        <div class='card-body'>
+                                            <h5 class='card-title'>${item.product_title}</h5>
+
+                                            <div class='card-price'>Price : ${item.product_price} <span>EGP</span></div>
+                                            <a 
+                                                class='btn btn-primary' add-to-cart data-product-id=${item.product_id}>
+                                                <i class='fas fa-cart-plus me-2' style='color: white;'></i>Add To Cart
+                                            </a>
+                                            <a href='product_details.php?product_id=${item.product_id}'  class='btn'>
+                                                <i class='fas fa-eye me-2 ' style='color: black;'></i>view
+                                            </a>
+                                        </div>
+                                    </div>
+                            `;
+                            $('#data').html(content);
+                        });
+                    }
+                    
+
+                },
+                error: function(){
+                    console.log('error')
+                }
+            })
+            })
+        })
+    </script>
+
+    <!-- ADD TO CART  -->
     <script>
         $(document).ready(function() {
-            $('[add-to-cart]').click(function(e) {
+            $(document).on('click','[add-to-cart]',function(e) {
+                console.log('what')
                 let productID = $(this).data('product-id');
                 $.ajax({
                     url: 'requests/cart.php',
@@ -90,6 +143,6 @@
         })
     </script>
 
-    </body>
+</body>
 
-    </html>
+</html>
