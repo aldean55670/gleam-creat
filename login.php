@@ -11,7 +11,7 @@ if ($_POST) {
     $username = htmlspecialchars($_POST['username'], ENT_QUOTES);
     $password = htmlspecialchars($_POST['password'], ENT_QUOTES);
 
-    $query = "SELECT username,password,email FROM register WHERE username = '$username'";
+    $query = "SELECT id, username,password,email FROM register WHERE username = '$username'";
     $result = mysqli_query($con, $query);
     // =======================================
     // chick username and password
