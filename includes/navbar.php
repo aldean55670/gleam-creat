@@ -1,7 +1,7 @@
 <?php @session_start();?>
 <?php include "./includes/conect.php";
 
-$res = @mysqli_query($con, "SELECT SUM(price) as total FROM cart where username = '$_SESSION[username]'");
+$res = @mysqli_query($con, "SELECT SUM(total_price) as total ,SUM(`count`) as totalcount FROM cart where username = '$_SESSION[username]'");
 $row = mysqli_fetch_assoc($res);
 ?>
 
@@ -26,7 +26,7 @@ $row = mysqli_fetch_assoc($res);
                 <li class="nav-item">
                     <a href="mycart.php" class="nav-link blueviolet">
                         <i class=" fa-solid fa-cart-shopping"></i>
-                        <sup id='count'><?=mysqli_num_rows(mysqli_query($con, "SELECT * FROM cart where username = '$_SESSION[username]'"));?></sup>
+                        <sup id='count'><?=$row['totalcount'];?></sup>
                     </a>
                 </li>
                 <?php }?>

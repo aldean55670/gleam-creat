@@ -48,7 +48,7 @@
                             <span id ="add-<?= $row['id']; ?>"><?= $row['count'];?></span>
                             <span class="btn-uppdate">
                                     <button class="plus"  add_1 data-content_id ="<?= $row['id']; ?>" ><i class="fa-solid fa-plus fa-xs"></i></button>
-                                    <button class="minus" minus_1 data_content_id ="<?= $row['id']; ?>" style="padding: 0 0px 2px 0;">-</button>
+                                    <button class="minus" minus_1 data-content_id ="<?= $row['id']; ?>" style="padding: 0 0px 2px 0;">-</button>
                             </span>
                         </div>
                     </td>
@@ -120,6 +120,8 @@
                     success:function(res){
                         $(`#add-${contentId}`).text(res.count);
                         $(`#total-${contentId}`).text(res.total_price);
+                        $('#count').text(res.total_row_count)
+                        $('#total-price').text(res.total_row_price)
                     },
                     error:function(){
                         console.log("error")
@@ -128,8 +130,32 @@
             })
         })
     </script>
-
-
+<!-- minus (1) count in the cart  -->
+    <script>
+        $(document).ready(function (){
+            $(document).on('click','[minus_1]',function(){
+                let contentId = $(this).data('content_id');
+                $.ajax({
+                    url:"add_minus_from_cart.php",
+                    method:"post",
+                    dataType:'json',
+                    data:{
+                        item_id_minus: contentId
+                    },
+                    success:function(res){
+                        console.log('success')
+                        $(`#add-${contentId}`).text(res.count);
+                        $(`#total-${contentId}`).text(res.total_price);
+                        $('#count').text(res.total_row_count)
+                        $('#total-price').text(res.total_row_price)
+                    },
+                    error:function(){
+                        console.log("error")
+                    }
+                })
+            })
+        })
+    </script>
             
     </body>
     </html>
