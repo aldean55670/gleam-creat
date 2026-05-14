@@ -8,7 +8,7 @@ $row = mysqli_fetch_assoc($res);
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top px-4">
     <div class="container-fluid">
-        <a class="navbar-brand logo-link" href="index.php">
+        <a class="navbar-brand logo-link blueviolet" href="index.php">
             <i class="fa-brands fa-42-group"></i>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,21 +24,21 @@ $row = mysqli_fetch_assoc($res);
                 </li>
             <?php if(isset($_SESSION['username']) && $_SESSION['username']){?>
                 <li class="nav-item">
-                    <a href="mycart.php" class="nav-link">
+                    <a href="mycart.php" class="nav-link blueviolet">
                         <i class=" fa-solid fa-cart-shopping"></i>
                         <sup id='count'><?=mysqli_num_rows(mysqli_query($con, "SELECT * FROM cart where username = '$_SESSION[username]'"));?></sup>
                     </a>
                 </li>
                 <?php }?>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" class=''>Total : $ <span id="total-price"><?= $row['total'];?></span>/- </a>
+                    <a class="nav-link" href="#" class=''>Total : $ <span id="total-price"><?= $row['total'];?></span>/EGP </a>
                 </li>
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" id="search" type="search" placeholder="Search products ...." style="min-width: 200px; " aria-label="Search" />
-                <button class="btn btn-custom" type="submit">
-                    <i class="fas fa-search"></i>
-                </button>
+                <div class='position-relative'>
+                    <i class="fas fa-search iconSearch"></i>
+                </div>
             </form>
 
             <!-- icon sign in  -->

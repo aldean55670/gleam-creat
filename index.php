@@ -43,7 +43,10 @@
         $(document).ready(function() {  
             let parentcard = $('#data').text() 
             
-            $('#search').on('input',function() {
+            $('#search').on('input',function(e) {
+                if(e.key === 'Enter'){
+                    e.preventDefault();
+                }
             $.ajax({
                 url: './search.php',
                 method: 'post',

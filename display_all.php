@@ -94,7 +94,10 @@
         $(document).ready(function() {  
             let parentcard = $('#data').text() 
             
-            $('#search').on('input',function() {
+            $('#search').on('input',function(e) {
+                if(e.key === 'Enter'){
+                    e.preventDefault();
+                }
             $.ajax({
                 url: './search.php',
                 method: 'post',
@@ -114,7 +117,6 @@
                                         <img src= 'images/${item.product_image1}' alt='Product Image' class='card-img-top '>
                                         <div class='card-body'>
                                             <h5 class='card-title'>${item.product_title}</h5>
-
                                             <div class='card-price'>Price : ${item.product_price} <span>EGP</span></div>
                                             <a 
                                                 class='btn btn-primary' add-to-cart data-product-id=${item.product_id}>

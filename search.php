@@ -6,7 +6,7 @@ include('includes/conect.php');
 if(isset($_POST['keyword'])){
     global $con;
     $key_word = htmlspecialchars(trim($_POST['keyword']),ENT_QUOTES|ENT_SUBSTITUTE);
-    $query = " SELECT * from products where product_title like '%'$key_word'%'";
+    $query = " SELECT * from products where product_title like '%$key_word%'";
     $res = mysqli_query($con,$query);
     
     $output_a=[];
@@ -17,7 +17,6 @@ if(isset($_POST['keyword'])){
     echo json_encode([
         'data' => $output_a,
         'count' => count($output_a)
-
     ]);
 }
 

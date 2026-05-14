@@ -12,7 +12,7 @@
     }
 
     $username = $_SESSION['username'];
-    $query = "SELECT product_title , price,image,id
+    $query = "SELECT product_title , price,image,id,count,total_price
                 FROM cart 
                 WHERE username = '$username' ";
     $result_show = mysqli_query($con,$query);
@@ -43,17 +43,33 @@
                         </td>
                         <td><?= $row['product_title']; ?></td>
                         <td><?= $row['price']; ?></td>
-                        <td>1</td>
-                        <td>3</td>
+                        <td counter>
+                        <div class="parent-counter">
+                            <span id ="add-<?= $row['id']; ?>"><?= $row['count'];?></span>
+                            <span class="btn-uppdate">
+                                    <button class="plus"  add_1 data-content_id ="<?= $row['id']; ?>" ><i class="fa-solid fa-plus fa-xs"></i></button>
+                                    <button class="minus" minus_1 data_content_id ="<?= $row['id']; ?>" style="padding: 0 0px 2px 0;">-</button>
+                            </span>
+                        </div>
+                    </td>
+                        <td totalPrice id ="total-<?= $row['id']; ?>">
+                            <?= $row['total_price'];?> 
+                        </td>
                         <td>
                             <a href="" class="btn" delete-item  data-id = "<?= $row['id'] ;?>">
                                 <i class="fa-solid fa-trash" style="color: #ff0000;"></i>
                             </a>
                         </td>
+                        
                     </tr>
                 <?php } ?>
                 </tbody>
             </table>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary w-50">
+                <a href="" class='white'>Pay Now</a>
+            </button>
         </div>
     </div>
 
@@ -76,7 +92,7 @@
                         item.remove()
                         $('sup').text(res.count)
                         $('#total-price').text(`${res.total ?? 0}`)
-                        console.log(res.total)
+
                     },
                     error: function(xhr,status,error){
                         console.log(xhr.responseText);
@@ -88,37 +104,32 @@
         })
     </script>
 
-
-
-
+    <!-- add plus(1) count in the cart -->
+    <script>
+        $(document).ready(function (){
+            $(document).on('click','[add_1]',function(){
+                let contentId = $(this).data('content_id');
+                // console.log(this);
+                $.ajax({
+                    url:"add_minus_from_cart.php",
+                    method:"post",
+                    dataType:'json',
+                    data:{
+                        item_id: contentId
+                    },
+                    success:function(res){
+                        $(`#add-${contentId}`).text(res.count);
+                        $(`#total-${contentId}`).text(res.total_price);
+                    },
+                    error:function(){
+                        console.log("error")
+                    }
+                })
+            })
+        })
+    </script>
 
 
             
     </body>
     </html>
-                        <!-- let nav = $('nav');
-                        nav.html( `
-                            <div class="container-fluid">
-                                <a class="navbar-brand logo-link" href="index.php">
-                                    <i class="fa-brands fa-42-group"></i>
-                                </a>
-                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                    <span class="navbar-toggler-icon"></span>
-                                </button>
-                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                        <li class="nav-item">
-                                            <a class="nav-link " href="index.php">Home</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="display_all.php">Products</a>
-                                        </li>
-                                                    <li class="nav-item">
-                                            <a href="mycart.php" class="nav-link">
-                                                <i class=" fa-solid fa-cart-shopping"></i>
-                                                <sup id='count'><?= $row['count'];?></sup>
-                                            </a>
-                                        </li>
-                                            <li class="nav-item">
-                                <a class="nav-link" href="#">Total : $<?= $row['total']; ?>/- </a>
-                        `); -->
