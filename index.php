@@ -117,7 +117,7 @@
                         </div>
                         `;
                         $('body').append(contnet);
-                        $('sup').text(data.count)
+                        $('#count').text(data.count)
                         $('#total-price').text(`${data.total ?? 0}`)
 
                         let toast = new bootstrap.Toast(document.getElementById('liveToast'));

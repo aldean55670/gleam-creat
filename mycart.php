@@ -34,7 +34,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php while ($row = mysqli_fetch_assoc($result_show)) { ?>
+                <?php while ($row = mysqli_fetch_assoc($result_show)) { 
+                    
+                    ?>
                     <tr  >
                         <td>
                             <img src="./images/<?= $row['image'];?>"
@@ -44,14 +46,14 @@
                         <td><?= $row['product_title']; ?></td>
                         <td><?= $row['price']; ?></td>
                         <td counter>
-                        <div class="parent-counter">
-                            <span id ="add-<?= $row['id']; ?>"><?= $row['count'];?></span>
-                            <span class="btn-uppdate">
-                                    <button class="plus"  add_1 data-content_id ="<?= $row['id']; ?>" ><i class="fa-solid fa-plus fa-xs"></i></button>
-                                    <button class="minus" minus_1 data-content_id ="<?= $row['id']; ?>" style="padding: 0 0px 2px 0;">-</button>
-                            </span>
-                        </div>
-                    </td>
+                            <div class="parent-counter">
+                                <span id ="add-<?= $row['id']; ?>"> <?= $row['count'];?> </span>
+                                <span class="btn-uppdate">
+                                        <button class="plus"  add_1 data-content_id ="<?= $row['id']; ?>" ><i class="fa-solid fa-plus fa-xs"></i></button>
+                                        <button class="minus" minus_1 data-content_id ="<?= $row['id']; ?>" style="padding: 0 0px 2px 0;">-</button>
+                                </span>
+                            </div>
+                        </td>
                         <td totalPrice id ="total-<?= $row['id']; ?>">
                             <?= $row['total_price'];?> 
                         </td>
@@ -66,13 +68,29 @@
                 </tbody>
             </table>
         </div>
-        <div class="text-center">
-            <button class="btn btn-primary w-50">
-                <a href="" class='white'>Pay Now</a>
-            </button>
-        </div>
+        <?php if(mysqli_num_rows($result_show) >= 1){?>
+            <div class="text-center" id="btn-pay">
+                <button class="btn btn-primary w-50">
+                    <a href="" class='white' id="payNow">Pay Now</a>
+                </button>
+            </div>
+        <?php } ?>
+        
     </div>
-
+<script>
+    let btn_pay= document.getElementById('payNow');
+    btn_pay.addEventListener('click', function() {
+    // إرسال طلب للسيرفر بتاعك لإنشاء "عملية دفع" (Payment Intent)
+    fetch('/create-checkout-session.php', {
+        method: 'POST',
+    })
+    .then(response => response.json())
+    .then(session => {
+        // توجيه المستخدم لصفحة الدفع الخاصة بالبوابة
+        window.location.href = session.url; 
+    });
+});
+</script>
     <!-- DELETE FROM CART -->
     <script>
         $(document).ready(function(){
@@ -88,11 +106,13 @@
                         element_id: id
                     },
                     success: function(res){
-                        // console.log(res)
+                        
                         item.remove()
-                        $('sup').text(res.count)
+                        $('sup').text(res.count ?? 0)
                         $('#total-price').text(`${res.total ?? 0}`)
-
+                        if(res.num == 0){
+                            $('#btn-pay').hide();
+                        }
                     },
                     error: function(xhr,status,error){
                         console.log(xhr.responseText);
@@ -133,8 +153,9 @@
 <!-- minus (1) count in the cart  -->
     <script>
         $(document).ready(function (){
-            $(document).on('click','[minus_1]',function(){
+            $(document).on('click','[minus_1]',function(e){
                 let contentId = $(this).data('content_id');
+                // if($(`#add-${contentId}`).text() == 1) return;
                 $.ajax({
                     url:"add_minus_from_cart.php",
                     method:"post",
@@ -144,6 +165,9 @@
                     },
                     success:function(res){
                         console.log('success')
+                        
+
+                        
                         $(`#add-${contentId}`).text(res.count);
                         $(`#total-${contentId}`).text(res.total_price);
                         $('#count').text(res.total_row_count)

@@ -1,7 +1,7 @@
 <?php @session_start();?>
 <?php include "./includes/conect.php";
 
-$res = @mysqli_query($con, "SELECT SUM(total_price) as total ,SUM(`count`) as totalcount FROM cart where username = '$_SESSION[username]'");
+$res = @mysqli_query($con, "SELECT SUM(total_price) as total_cash ,SUM(`count`) as totalcount FROM cart where username = '$_SESSION[username]'");
 $row = mysqli_fetch_assoc($res);
 ?>
 
@@ -26,12 +26,14 @@ $row = mysqli_fetch_assoc($res);
                 <li class="nav-item">
                     <a href="mycart.php" class="nav-link blueviolet">
                         <i class=" fa-solid fa-cart-shopping"></i>
-                        <sup id='count'><?=$row['totalcount'];?></sup>
+                        <sup id='count'>
+                            <?=$row['totalcount']??0;?>
+                        </sup>
                     </a>
                 </li>
                 <?php }?>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" class=''>Total : $ <span id="total-price"><?= $row['total'];?></span>/EGP </a>
+                    <a class="nav-link"  class=''>Total : $ <span id="total-price"><?= $row['total_cash']??0;?></span>/EGP </a>
                 </li>
             </ul>
             <form class="d-flex" role="search">

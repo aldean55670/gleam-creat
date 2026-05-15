@@ -16,7 +16,7 @@ $username = $_SESSION['username'];
 $result_chick_chick = [];
 
 if(isset($_GET['product_id'])){
-    $product_id = (int) ($_GET['product_id'] ?? 0);
+    $product_id = (int) ($_GET['product_id']);
     $product = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `products` WHERE product_id = $product_id"));
     if ($product) {
         $query = "INSERT INTO cart (
@@ -51,7 +51,7 @@ if(isset($_GET['product_id'])){
         $result_chick = ['success' => false, 'message' => 'Product not found'];
     }
 
-    $query2 = "SELECT COUNT(*)  as count, SUM(price) as total
+    $query2 = "SELECT  SUM(`count`)  as total_count, SUM(price) as total
             FROM cart
             WHERE username = '$username'";
 
@@ -62,7 +62,7 @@ if(isset($_GET['product_id'])){
     echo json_encode([
             'result_chick' => $result_chick,
         'success' => true,
-        'count' => $row['count'],
+        'count' => $row['total_count'],
         'total' => $row['total']
     ]);
     exit;

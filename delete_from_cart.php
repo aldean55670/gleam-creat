@@ -12,17 +12,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $username = $_SESSION['username'];
 
-    $query = "SELECT COUNT(*) as count, SUM(price) as total
+    $query = "SELECT SUM(`count`) as total_count, SUM(total_price) AS t_price, count(product_title) as num
                 FROM cart
                 WHERE username = '$username'";
 
     $result = mysqli_query($con, $query);
     $row = mysqli_fetch_assoc($result);
-
+    
     echo json_encode([
         'success' => true,
-        'count' => $row['count'],
-        'total' => $row['total']
+        'count' => $row['total_count'],
+        'total' => $row['t_price'],
+        'num'   => $row['num']
     ]);
 
     exit;
