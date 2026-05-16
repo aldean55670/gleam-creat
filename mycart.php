@@ -77,20 +77,7 @@
         <?php } ?>
         
     </div>
-<script>
-    let btn_pay= document.getElementById('payNow');
-    btn_pay.addEventListener('click', function() {
-    // إرسال طلب للسيرفر بتاعك لإنشاء "عملية دفع" (Payment Intent)
-    fetch('/create-checkout-session.php', {
-        method: 'POST',
-    })
-    .then(response => response.json())
-    .then(session => {
-        // توجيه المستخدم لصفحة الدفع الخاصة بالبوابة
-        window.location.href = session.url; 
-    });
-});
-</script>
+
     <!-- DELETE FROM CART -->
     <script>
         $(document).ready(function(){
