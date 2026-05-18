@@ -4,9 +4,6 @@ include("../includes/conect.php");
 session_start();
 global $con;
 
-
-
-
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     
     $element_id = $_POST['element_id'];

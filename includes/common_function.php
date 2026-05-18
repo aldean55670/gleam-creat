@@ -43,7 +43,7 @@ function get_product()
         if (isset($_GET['occasion']) || isset($_GET['category'])) return;
         echo "
             <div class='card smothy'>
-                <img src= 'images/$product_image1' alt='Product Image' class='card-img-top '>
+                <img src= '$product_image1' alt='Product Image' class='card-img-top '>
                 <div class='card-body'>
                     <h5 class='card-title'>$product_title</h5>
                     <p class='card-text'>" . substr($product_description, 0, 30) . "</p>
@@ -82,7 +82,7 @@ function get_all_product()
         if (isset($_GET['occasion']) || isset($_GET['category'])) return;
         echo "
             <div class='card smothy'>
-                <img src= 'images/$product_image1' alt='Product Image' class='card-img-top '>
+                <img src= '$product_image1' alt='Product Image' class='card-img-top '>
                 <div class='card-body'>
                     <h5 class='card-title'>$product_title</h5>
                     <p class='card-text'>" . substr($product_description, 0, 30) . "</p>
@@ -119,7 +119,7 @@ function get_uniqe_category()
             $product_price = $row['product_price'];
             echo "
                     <div class='card smothy'>
-                        <img src= 'images/$product_image1' alt='Product Image' class='card-img-top '>
+                        <img src= '$product_image1' alt='Product Image' class='card-img-top '>
                         <div class='card-body'>
                             <h5 class='card-title'>$product_title</h5>
                             <p class='card-text'>" . substr($product_description, 0, 30) . "</p>
@@ -156,7 +156,7 @@ function get_uniqe_occasion()
             if (isset($_GET['occasion'])) {
                 echo "
                     <div class='card smothy'>
-                        <img src='images/$product_image1' alt='Product Image' class='card-img-top '>
+                        <img src='$product_image1' alt='Product Image' class='card-img-top '>
                         <div class='card-body'>
                             <h5 class='card-title'>$product_title</h5>
                             <p class='card-text'>" . substr($product_description, 0, 30) . "</p>
@@ -192,7 +192,7 @@ function get_product_view()
     $result = "
         <div class='container'>
             <div class='view_product'>
-                <img src= 'images/$product_image1' class=' width500 rounded mx-auto d-block' alt='Responsive image' '>
+                <img src= '$product_image1' class=' width500 rounded mx-auto d-block' alt='Responsive image' '>
                 <div class=''>
                     <h5 class='text-center >$product_title</h5>
                     <div class='container_view_product'>

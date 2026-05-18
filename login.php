@@ -11,7 +11,7 @@ if ($_POST) {
     $username = htmlspecialchars($_POST['username'], ENT_QUOTES);
     $password = htmlspecialchars($_POST['password'], ENT_QUOTES);
     // user table 
-    $query = "SELECT id, username,password,email FROM register WHERE username = '$username'";
+    $query = "SELECT id, username,password,email,status FROM register WHERE username = '$username'";
     $result = mysqli_query($con, $query);
     // =======================================
     // chick username and password
@@ -23,8 +23,9 @@ if ($_POST) {
             // =============================
             // chick dmin or user
             // =============================
-            if($username =='hossam'){
-                header("Location:dashboard.php");
+            if($data['status']==='admin'){
+                $_SESSION['admin'] = $data['status']; 
+                header("Location:dashboard/dashboard.php");
                 }else{
                     header("Location:index.php");
             }

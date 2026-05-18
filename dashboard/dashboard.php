@@ -1,19 +1,20 @@
 <?php
 session_start();
-include("includes/header.php");
-include("includes/conect.php");
-
-$page_title = 'Gleam - Dashboard';
-$username = $_SESSION['username'];
-if($username != 'hossam'){
-    header('Location:index.php');
+if($_SESSION['admin'] !== 'admin'){
+    header('Location:../index.php');
     exit();
     }
-include("includes/common_function.php");
+include("header.php");
+include("conect.php");
+
+$page_title = 'Gleam - Dashboard';
+
+
+include("../includes/common_function.php");
 ?>
 
 <div class="flex-grow-1">
-    <?php include("includes/navbar.php"); ?>
+    <?php include("navbar.php"); ?>
     <div class="container-fluid py-5">
         <div class="row mb-4">
             <div class="col-12">
@@ -26,7 +27,7 @@ include("includes/common_function.php");
             <div class="col-md-3 mb-3">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
-                        <a href="dashboard/total_product.php">
+                        <a href="total_product.php">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <p class="text-muted mb-1">Total Products</p>
@@ -42,7 +43,7 @@ include("includes/common_function.php");
             <div class="col-md-3 mb-3">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
-                        <a href="dashboard/total_order.php">
+                        <a href="total_order.php">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <p class="text-muted mb-1">Total Orders</p>
@@ -74,7 +75,7 @@ include("includes/common_function.php");
             <div class="col-md-3 mb-3">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
-                        <a href="dashboard/users.php">
+                        <a href="users.php">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <p class="text-muted mb-1">Users</p>
@@ -127,7 +128,7 @@ include("includes/common_function.php");
         </div>
     </div>
 
-    <?php include("includes/footer.php"); ?>
+    <?php include("../includes/footer.php"); ?>
 </div>
 
 </body>
