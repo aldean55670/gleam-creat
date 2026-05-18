@@ -4,9 +4,9 @@ ob_start();
 
 if(isset($_SESSION['username'])){
     $page_title = "Acount";
-    include('includes/conect.php');
-    include('includes/navbar.php');
-    include('includes/header.php');
+    include(__DIR__ . '/includes/conect.php');
+    include(__DIR__ . '/includes/navbar.php');
+    include(__DIR__ . '/includes/header.php');
     global $con;
     $username = $_SESSION['username'];
     $query = "SELECT username,email FROM register WHERE username='$username'";
@@ -31,7 +31,7 @@ if(isset($_SESSION['username'])){
         </li>
     </ul>
 <?php } else{
-        include('login.php');
+        include(__DIR__ . '/login.php');
 }
 ob_end_flush();
 ?>

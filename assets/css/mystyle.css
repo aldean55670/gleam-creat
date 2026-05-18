@@ -58,7 +58,7 @@ sup {
 
 }
 
-.row {
+.parent-category-ocassion {
     list-style: none;
     background-color: #acc8ff1c;
     max-width: 200px;
@@ -66,26 +66,26 @@ sup {
     max-height: 400px;
 }
 
-.row ul {
+.parent-category-ocassion ul {
     padding-left: 0rem;
     padding-right: 0rem;
 }
 
-.row li {
+.parent-category-ocassion li {
     list-style: none;
     padding: 3px 0;
     padding-left: 33px;
     cursor: pointer;
 }
 
-.row li:hover {
+.parent-category-ocassion li:hover {
     color: blueviolet;
     padding-left: 40px;
     transition: .3s;
     background-color: #acc8ff;
 }
 
-.row h4 {
+.parent-category-ocassion h4 {
     border-bottom: #989851 solid;
     padding: 3px 0;
     padding-left: 15px;

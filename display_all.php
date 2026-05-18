@@ -1,20 +1,20 @@
 <?php
-    include("includes/header.php");
-    include("includes/conect.php");
-    include("includes/common_function.php");
+    include(__DIR__ . "/includes/header.php");
+    include(__DIR__ . "/includes/conect.php");
+    include(__DIR__ . "/includes/common_function.php");
 ?>
 
 <script>
     document.title = 'Gleam - creats - Home'
 </script>
 <div class="flex-grow-1">
-    <?php include("includes/navbar.php") ?>
+    <?php include(__DIR__ . "/includes/navbar.php") ?>
     <!-- Home page -->
     <div class="container my-4">
         <div class="hero-banner">Find The Perfect Gift For Every Occasion!</div>
     </div>
     <div class="container-cards container">
-        <div class="row">  
+        <div class="parent-category-ocassion">  
             <div>
                 <h4>Occasion</h4>
                 <ul class="navebar-nav">
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <?php include("includes/footer.php") ?>
+    <?php include(__DIR__ . "/includes/footer.php") ?>
     </body>
 <!-- ADD TO CART  -->
     <script>

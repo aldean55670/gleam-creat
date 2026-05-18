@@ -1,5 +1,5 @@
 <?php @session_start();?>
-<?php include "./includes/conect.php";
+<?php include __DIR__ . "/conect.php";
 
 $res = @mysqli_query($con, "SELECT SUM(total_price) as total_cash ,SUM(`count`) as totalcount FROM cart where username = '$_SESSION[username]'");
 $row = mysqli_fetch_assoc($res);
@@ -22,7 +22,7 @@ $row = mysqli_fetch_assoc($res);
                 <li class="nav-item">
                     <a class="nav-link" href="display_all.php">Products</a>
                 </li>
-            <?php if(isset($_SESSION['username']) && $_SESSION['username']){?>
+                <?php if(isset($_SESSION['username']) && $_SESSION['username']){?>
                 <li class="nav-item">
                     <a href="mycart.php" class="nav-link blueviolet">
                         <i class=" fa-solid fa-cart-shopping"></i>
@@ -32,9 +32,17 @@ $row = mysqli_fetch_assoc($res);
                     </a>
                 </li>
                 <?php }?>
+                
                 <li class="nav-item">
                     <a class="nav-link"  class=''>Total : $ <span id="total-price"><?= $row['total_cash']??0;?></span>/EGP </a>
                 </li>
+                <?php if(isset($_SESSION['username'])&&$_SESSION['username'] == 'hossam'){ ?>
+                <li class="nav-item">
+                    <a class="btn btn-primary" href="dashboard.php">
+                        dashBoard
+                    </a>
+                </li>
+                <?php }?>
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" id="search" type="search" placeholder="Search products ...." style="min-width: 200px; " aria-label="Search" />
@@ -45,7 +53,7 @@ $row = mysqli_fetch_assoc($res);
 
             <!-- icon sign in  -->
             <?php if(isset($_SESSION['username']) && $_SESSION['username']){?>
-                <ul class="mb-0" >
+                <ul class="mb-0 " >
                     <li class="nav-item" style="list-style:none">
                         <a class="nav-link" href="My-Acount.php">
                             <!-- i this -->

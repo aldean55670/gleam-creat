@@ -10,17 +10,24 @@ if ($_POST) {
     global $con;
     $username = htmlspecialchars($_POST['username'], ENT_QUOTES);
     $password = htmlspecialchars($_POST['password'], ENT_QUOTES);
-
+    // user table 
     $query = "SELECT id, username,password,email FROM register WHERE username = '$username'";
     $result = mysqli_query($con, $query);
     // =======================================
     // chick username and password
     // =======================================
+
     if ($data = mysqli_fetch_assoc($result)) {
-        $email = $data['email'];
         if (password_verify($password, $data['password'])) {
             $_SESSION['username'] = $username;
-            header("Location:index.php");
+            // =============================
+            // chick dmin or user
+            // =============================
+            if($username =='hossam'){
+                header("Location:dashboard.php");
+                }else{
+                    header("Location:index.php");
+            }
         }else{echo "<h4 class='alert alert-danger'>Password Is Wrong</h4>";}
     }else{echo "<h4 class='alert alert-danger'>User Name Is Wrong</h4>";}
 }

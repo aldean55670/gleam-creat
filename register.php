@@ -1,8 +1,8 @@
 <?php
 $page_title = "Register";
-include("includes/header.php");
-include("includes/navbar.php");
-include("includes/conect.php");
+include(__DIR__ . "/includes/header.php");
+include(__DIR__ . "/includes/navbar.php");
+include(__DIR__ . "/includes/conect.php");
 if ($_POST) {
     global $con;
     $username = $_POST['username'];

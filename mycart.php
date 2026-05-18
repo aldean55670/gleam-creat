@@ -1,10 +1,9 @@
 <?php
     ob_start();
-    @session_start();
 
-    include "./includes/conect.php";
-    include "./includes/header.php";
-    include "./includes/navbar.php";
+    include __DIR__ . "/includes/conect.php";
+    include __DIR__ . "/includes/header.php";
+    include __DIR__ . "/includes/navbar.php";
 
     if(!isset($_SESSION['username'])){
         header("Location:login.php");
@@ -70,15 +69,18 @@
         </div>
         <?php if(mysqli_num_rows($result_show) >= 1){?>
             <div class="text-center" id="btn-pay">
-                <button class="btn btn-primary w-50">
-                    <a href="" class='white' id="payNow">Pay Now</a>
-                </button>
+                <a href="./pay.php" class='white ' >
+                        <button id="payNow" class="btn btn-primary w-50">
+                        Pay Now
+                    </button>
+                    </a>
             </div>
         <?php } ?>
         
     </div>
 
     <!-- DELETE FROM CART -->
+
     <script>
         $(document).ready(function(){
             $('[delete-item]').click(function(e){
@@ -86,7 +88,7 @@
                 let id = $(this).data('id');
                 let item = $(this).closest('tr');
                 $.ajax({
-                    url:"delete_from_cart.php",
+                    url:"requests/delete_from_cart.php",
                     method:'post',
                     dataType:'json',
                     data:{
@@ -97,7 +99,7 @@
                         item.remove()
                         $('sup').text(res.count ?? 0)
                         $('#total-price').text(`${res.total ?? 0}`)
-                        if(res.num == 0){
+                        if(res.count < 1){
                             $('#btn-pay').hide();
                         }
                     },
@@ -167,6 +169,6 @@
             })
         })
     </script>
-            
-    </body>
-    </html>
+
+        </body>
+        </html>
