@@ -38,7 +38,7 @@ $row = mysqli_fetch_assoc($res);
                 </li>
                 <?php if(isset($_SESSION['username'])&&$_SESSION['username'] == 'hossam'){ ?>
                 <li class="nav-item">
-                    <a class="btn btn-primary" href="dashboard/dashboard.php">
+                    <a class="btn btn-primary" href="dashboard/index.php">
                         dashBoard
                     </a>
                 </li>

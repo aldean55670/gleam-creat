@@ -38,7 +38,7 @@ $row = mysqli_fetch_assoc($res);
                 </li>
                 <?php if($_SESSION['admin'] === 'admin'){ ?>
                 <li class="nav-item">
-                    <a class="btn btn-primary" href="dashboard.php">
+                    <a class="btn btn-primary" href="index.php">
                         dashBoard
                     </a>
                 </li>

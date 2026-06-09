@@ -2,6 +2,7 @@
     include("includes/header.php"); 
     include("includes/conect.php");
     include("includes/common_function.php");
+    ob_start();
 ?>
 <script>
     document.title = 'Gleam - creats - Home'
@@ -96,6 +97,7 @@
     <script>
         $(document).ready(function() {
             $(document).on('click','[add-to-cart]',function(e) {
+                <?php if(!isset($_SESSION['username'])) header('Location:./login.php');?>
                 console.log('what')
                 let productID = $(this).data('product-id');
                 $.ajax({
@@ -147,5 +149,5 @@
     </script>
 
 </body>
-
+<?php ob_end_flush();?>
 </html>

@@ -38,7 +38,7 @@
                     ?>
                     <tr  >
                         <td>
-                            <img src="./images/<?= $row['image'];?>"
+                            <img src="<?= $row['image'];?>"
                                 width="70"
                                 class="rounded">
                         </td>
@@ -69,7 +69,7 @@
         </div>
         <?php if(mysqli_num_rows($result_show) >= 1){?>
             <div class="text-center" id="btn-pay">
-                <a href="./pay.php" class='white ' >
+                <a href="./Pay/pay.php" class='white ' >
                         <button id="payNow" class="btn btn-primary w-50">
                         Pay Now
                     </button>

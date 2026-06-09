@@ -25,7 +25,7 @@ if ($_POST) {
             // =============================
             if($data['status']==='admin'){
                 $_SESSION['admin'] = $data['status']; 
-                header("Location:dashboard/dashboard.php");
+                header("Location:dashboard/index.php");
                 }else{
                     header("Location:index.php");
             }
