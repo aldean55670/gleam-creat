@@ -25,7 +25,6 @@ while ($row = mysqli_fetch_assoc($result)) {
 $data['mode'] = 'payment';
 $data['success_url'] = 'http://localhost/success.php';
 $data['cancel_url'] = 'http://localhost/GLEAM-CREAT/mycart.php';
-$secretKey = getenv('STRIPE_SECRET_KEY');
 $init = curl_init();
 curl_setopt($init, CURLOPT_URL, 'https://api.stripe.com/v1/checkout/sessions');
 curl_setopt($init, CURLOPT_POST, true);
