@@ -8,6 +8,7 @@
     document.title = 'Gleam - creats - Home'
 </script>
 
+
 <div class="flex-grow-1">
     <?php include("includes/navbar.php") ?>
     <!-- Home page -->
@@ -95,9 +96,13 @@
 
     <!-- ADD TO CART  -->
     <script>
+        let user = "<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : ''; ?>"
         $(document).ready(function() {
             $(document).on('click','[add-to-cart]',function(e) {
-                <?php if(!isset($_SESSION['username'])) header('Location:./login.php');?>
+                if(user == ''){
+                    window.location.href = 'login.php';
+                    
+                }
                 console.log('what')
                 let productID = $(this).data('product-id');
                 $.ajax({

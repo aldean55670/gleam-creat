@@ -1,5 +1,6 @@
-<?php @session_start();?>
-<?php include __DIR__ . "/conect.php";
+<?php @session_start(); ?>
+<?php
+include __DIR__ . '/conect.php';
 
 $res = @mysqli_query($con, "SELECT SUM(total_price) as total_cash ,SUM(`count`) as totalcount FROM cart where username = '$_SESSION[username]'");
 $row = mysqli_fetch_assoc($res);
@@ -22,27 +23,30 @@ $row = mysqli_fetch_assoc($res);
                 <li class="nav-item">
                     <a class="nav-link" href="display_all.php">Products</a>
                 </li>
-                <?php if(isset($_SESSION['username']) && $_SESSION['username']){?>
+                <li class="nav-item">
+                    <a class="nav-link" href="orders.php">Orders</a>
+                </li>
+                <?php if (isset($_SESSION['username']) && $_SESSION['username']) { ?>
                 <li class="nav-item">
                     <a href="mycart.php" class="nav-link blueviolet">
                         <i class=" fa-solid fa-cart-shopping"></i>
                         <sup id='count'>
-                            <?=$row['totalcount']??0;?>
+                            <?= $row['totalcount'] ?? 0; ?>
                         </sup>
                     </a>
                 </li>
-                <?php }?>
+                <?php } ?>
                 
                 <li class="nav-item">
-                    <a class="nav-link"  class=''>Total : $ <span id="total-price"><?= $row['total_cash']??0;?></span>/EGP </a>
+                    <a class="nav-link"  class=''>Total : $ <span id="total-price"><?= $row['total_cash'] ?? 0; ?></span>/EGP </a>
                 </li>
-                <?php if(isset($_SESSION['username'])&&$_SESSION['username'] == 'hossam'){ ?>
+                <?php if (isset($_SESSION['username']) && $_SESSION['username'] == 'hossam') { ?>
                 <li class="nav-item">
                     <a class="btn btn-primary" href="dashboard/index.php">
                         dashBoard
                     </a>
                 </li>
-                <?php }?>
+                <?php } ?>
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" id="search" type="search" placeholder="Search products ...." style="min-width: 200px; " aria-label="Search" />
@@ -52,12 +56,12 @@ $row = mysqli_fetch_assoc($res);
             </form>
 
             <!-- icon sign in  -->
-            <?php if(isset($_SESSION['username']) && $_SESSION['username']){?>
+            <?php if (isset($_SESSION['username']) && $_SESSION['username']) { ?>
                 <ul class="mb-0 " >
                     <li class="nav-item" style="list-style:none">
                         <a class="nav-link" href="My-Acount.php">
                             <!-- i this -->
-                            <?php 
+                            <?php
                             $user = substr(strtoupper($_SESSION['username']), 0, 1);
                             echo "<div class='logo-login'>$user</div>";
                             ?>
@@ -65,7 +69,7 @@ $row = mysqli_fetch_assoc($res);
                     </li>
                 </ul>
                 
-            <?php }else{?>
+            <?php } else { ?>
                         <ul class="mb-0">
                     <li class="nav-item" style="list-style:none">
                         <a class="btn btn-primary" href="My-Acount.php">
@@ -73,7 +77,7 @@ $row = mysqli_fetch_assoc($res);
                         </a>
                     </li>
                 </ul>
-                <?php }?>
+                <?php } ?>
         </div>
     </div>
 </nav>

@@ -2,7 +2,7 @@
 session_start();
 include ('../includes/conect.php');
 require_once 'config.php';
-require_once './config.php';
+
 $username = $_SESSION['username'];
 $query =
     "SELECT product_title, price ,count
@@ -23,8 +23,8 @@ while ($row = mysqli_fetch_assoc($result)) {
     $counter++;
 }
 $data['mode'] = 'payment';
-$data['success_url'] = 'http://localhost/success.php';
-$data['cancel_url'] = 'http://localhost/GLEAM-CREAT/mycart.php';
+$data['success_url'] = "http://localhost/GLEAM-CREATE/Pay/sucsess.php?session_id={CHECKOUT_SESSION_ID}";
+$data['cancel_url'] = 'http://localhost/GLEAM-CREATE/mycart.php';
 $init = curl_init();
 curl_setopt($init, CURLOPT_URL, 'https://api.stripe.com/v1/checkout/sessions');
 curl_setopt($init, CURLOPT_POST, true);
@@ -41,7 +41,7 @@ if ($response === false) {
     exit;
 }
 curl_close($init);
-
 $result = json_decode($response, true);
+$_SESSION['pay'] = $result['payment_status'];
 header('Location: ' . $result['url']);
 exit;

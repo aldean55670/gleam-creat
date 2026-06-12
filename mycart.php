@@ -68,13 +68,25 @@
             </table>
         </div>
         <?php if(mysqli_num_rows($result_show) >= 1){?>
-            <div class="text-center" id="btn-pay">
-                <a href="./Pay/pay.php" class='white ' >
-                        <button id="payNow" class="btn btn-primary w-50">
-                        Pay Now
-                    </button>
-                    </a>
-            </div>
+        <div>
+            <div class='btns-pay'>
+                <div class="text-center" id="btn-pay">
+                    <a href="./Pay/pay.php" class='white ' >
+                            <button id="payNow" class="btn btn-primary ">
+                            Pay Now
+                        </button>
+                        </a>
+                </div>
+                <div class="text-center" id="btn-cash">
+                    <a href="./Pay/cash" class='white ' >
+                            <button id="cash" class="btn btn-primary ">
+                            Cash Delevary
+                        </button>
+                        </a>
+                </div>
+        </div>
+
+        </div>
         <?php } ?>
         
     </div>

@@ -20,9 +20,11 @@ body {
 .blueviolet {
     color: blueviolet;
 }
-.blueviolet:hover{
+
+.blueviolet:hover {
     color: #892be298;
 }
+
 .red {
     color: red;
 }
@@ -255,11 +257,183 @@ li {
     padding: 0 3px;
     border-radius: 3px;
 }
-.plus:hover{
+
+.plus:hover {
     background-color: #008000a3;
     color: white;
 }
-.minus:hover{
+
+.minus:hover {
     background-color: #ff0000a0;
+    color: white;
+}
+
+.btns-pay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+}
+
+/* order page */
+.no-orders {
+    max-width: 500px;
+    margin: 80px auto;
+    padding: 40px 30px;
+    text-align: center;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+}
+
+.no-orders .icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+}
+
+.no-orders h2 {
+    margin: 0;
+    font-size: 32px;
+    color: #222;
+}
+
+.no-orders p {
+    margin: 15px 0 25px;
+    color: #777;
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+.shop-btn {
+    display: inline-block;
+    padding: 14px 28px;
+    background: #111827;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.shop-btn:hover {
+    transform: translateY(-2px);
+}
+.order-card {
+    transition: all .3s ease;
+}
+
+.order-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .08) !important;
+}
+
+.order-status-line {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.order-status-line span {
+    width: 40px;
+    height: 6px;
+    border-radius: 20px;
+    background: #e5e7eb;
+}
+
+.order-status-line span.active {
+    background: #198754;
+}
+
+.card-header {
+    background: #fff;
+}
+
+.btn {
+    font-weight: 600;
+}
+
+.badge {
+    font-size: .85rem;
+}
+
+.order-card img {
+    object-fit: cover;
+}
+
+/* Orders Page Styles */
+.table {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table thead {
+    background: linear-gradient(to right, #410e71, blueviolet);
+}
+
+.table th {
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+}
+
+.table td {
+    text-align: center;
+    padding: 15px !important;
+    vertical-align: middle;
+}
+
+.table tbody tr {
+    transition: all .3s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.01);
+}
+
+.badge {
+    padding: 8px 12px;
+    font-weight: 500;
+}
+
+/* Dashboard Styles */
+.card {
+    border-radius: 12px !important;
+}
+
+.card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+.card-body {
+    padding: 24px !important;
+}
+
+h1.blueviolet {
+    font-weight: 700;
+    font-size: 28px;
+}
+
+.table-hover tbody tr {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(65, 14, 113, 0.05);
+}
+
+.btn-outline-primary {
+    color: blueviolet;
+    border-color: blueviolet;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background-color: blueviolet;
+    border-color: blueviolet;
     color: white;
 }
