@@ -38,7 +38,7 @@ include('includes/header.php') ?>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <p class="text-muted mb-1">Total Orders</p>
-                                    <h3 class="mb-0">0</h3>
+                                    <h3 id='total_order' class="mb-0">0</h3>
                                 </div>
                                 <i class="fas fa-shopping-bag fa-3x text-success opacity-50"></i>
                             </div>
@@ -47,21 +47,6 @@ include('includes/header.php') ?>
                 </div>
             </div>
 
-            <div class="col-md-3 mb-3">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-body">
-                        <a href="#">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <p class="text-muted mb-1">Revenue</p>
-                                    <h3 class="mb-0"> EGP</h3>
-                                </div>
-                                <i class="fas fa-coins fa-3x text-warning opacity-50"></i>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
 
             <div class="col-md-3 mb-3">
                 <div class="card border-0 shadow-sm">
@@ -80,47 +65,7 @@ include('includes/header.php') ?>
             </div>
         </div>
 
-        <!-- Charts & Tables Section -->
-        <!-- <div class="row">
-            <div class="col-lg-8 mb-4">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-header bg-light border-bottom">
-                        <h5 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Recent Activity</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="text-muted text-center py-5">No data available yet</p>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-lg-4 mb-4">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-header bg-light border-bottom">
-                        <h5 class="mb-0"><i class="fas fa-list me-2"></i>Quick Links</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="list-group list-group-flush">
-                            <a href="display_all.php" class="list-group-item list-group-item-action">
-                                <i class="fas fa-th me-2"></i>View Products
-                            </a>
-                            <a href="mycart.php" class="list-group-item list-group-item-action">
-                                <i class="fas fa-shopping-cart me-2"></i>Cart
-                            </a>
-                            <a href="My-Acount.php" class="list-group-item list-group-item-action">
-                                <i class="fas fa-user me-2"></i>My Account
-                            </a>
-                            <a href="logout.php" class="list-group-item list-group-item-action text-danger">
-                                <i class="fas fa-sign-out-alt me-2"></i>Logout
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    </div> -->
-    <!--end::Container-->
 </div>
 <!--end::App Content-->
 

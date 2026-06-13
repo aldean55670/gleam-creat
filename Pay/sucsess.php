@@ -31,8 +31,8 @@ if ($data['payment_status'] === 'paid') {
 
     if (mysqli_num_rows($check_result) == 0) {
         if (mysqli_query($con, $check_query)) {
-            $query = "INSERT INTO orders (product_name, status, count, username,session_id,price)
-            SELECT product_title, 'paid', count,  username,'$session_id',price
+            $query = "INSERT INTO orders (product_name,product_id, status, count, username,session_id,price)
+            SELECT product_title,product_id, 'paid', count,  username,'$session_id',price
             FROM cart
             WHERE username = '$username';";
 

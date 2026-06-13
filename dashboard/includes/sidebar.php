@@ -1,3 +1,20 @@
+<?php 
+$con=mysqli_connect('localhost','root','','mystore');
+if(!$con){
+    die('connection failed: '.mysqli_connect_error());
+}
+
+
+$resultOrders = mysqli_query($con," SELECT COUNT(*) as totalOrder FROM orders");
+$resultUsers = mysqli_query($con," SELECT COUNT(*) as totalUsers FROM  register");
+$resultProducts = mysqli_query($con," SELECT COUNT(*) totalProducts FROM  products");
+$users = mysqli_fetch_assoc($resultUsers)['totalUsers'];
+$orders = mysqli_fetch_assoc($resultOrders)['totalOrder'];
+
+$products = mysqli_fetch_assoc($resultProducts)['totalProducts'];
+
+?>
+
 <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
     <div class="sidebar-brand">
         <a href="./index.php" class="brand-link">
@@ -24,31 +41,31 @@
             <li class="nav-header">Product Management</li>
             <!-- products -->
             <li class="nav-item">
-                <a href="prodect-management.php" class="nav-link">
+                <a href="total_product.php" class="nav-link">
                     <i class="nav-icon bi bi-speedometer"></i>
                     <p>
                         Product
-                        <span class="badge badge-info right">2</span>
+                        <span class="badge badge-info right"><?= $products?></span>
                     </p>
                 </a>
             </li>
             <!-- users -->
             <li class="nav-item">
-                <a href="prodect-management.php" class="nav-link">
+                <a href="users.php" class="nav-link">
                     <i class="nav-icon bi bi-speedometer"></i>
                     <p>
                         Users
-                        <span class="badge badge-info right">2</span>
+                        <span class="badge badge-info right"><?= $users?></span>
                     </p>
                 </a>
             </li>
             
             <li class="nav-item">
-                <a href="prodect-management.php" class="nav-link">
+                <a href="total_order.php" class="nav-link">
                     <i class="nav-icon bi bi-speedometer"></i>
                     <p>
-                        Users
-                        <span class="badge badge-info right">2</span>
+                        Total Orders
+                        <span class="badge badge-info right"><?= $orders?></span>
                     </p>
                 </a>
             </li>

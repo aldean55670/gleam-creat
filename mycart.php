@@ -1,21 +1,21 @@
 <?php
-    ob_start();
+ob_start();
 
-    include __DIR__ . "/includes/conect.php";
-    include __DIR__ . "/includes/header.php";
-    include __DIR__ . "/includes/navbar.php";
+include __DIR__ . '/includes/conect.php';
+include __DIR__ . '/includes/header.php';
+include __DIR__ . '/includes/navbar.php';
 
-    if(!isset($_SESSION['username'])){
-        header("Location:login.php");
-        exit();
-    }
+if (!isset($_SESSION['username'])) {
+    header('Location:login.php');
+    exit();
+}
 
-    $username = $_SESSION['username'];
-    $query = "SELECT product_title , price,image,id,count,total_price
+$username = $_SESSION['username'];
+$query = "SELECT product_title , price,image,id,count,total_price
                 FROM cart 
                 WHERE username = '$username' ";
-    $result_show = mysqli_query($con,$query);
-    ?>
+$result_show = mysqli_query($con, $query);
+?>
 
     <div class="container mt-5">
         <h2 class="mb-4 text-center blueviolet">My Products</h2>
@@ -32,13 +32,13 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody>
-                <?php while ($row = mysqli_fetch_assoc($result_show)) { 
-                    
+                <tbody >
+                <?php
+                while ($row = mysqli_fetch_assoc($result_show)) {
                     ?>
-                    <tr  >
+                    <tr class='body-cart' >
                         <td>
-                            <img src="<?= $row['image'];?>"
+                            <img src="<?= $row['image']; ?>"
                                 width="70"
                                 class="rounded">
                         </td>
@@ -46,7 +46,7 @@
                         <td><?= $row['price']; ?></td>
                         <td counter>
                             <div class="parent-counter">
-                                <span id ="add-<?= $row['id']; ?>"> <?= $row['count'];?> </span>
+                                <span id ="add-<?= $row['id']; ?>"> <?= $row['count']; ?> </span>
                                 <span class="btn-uppdate">
                                         <button class="plus"  add_1 data-content_id ="<?= $row['id']; ?>" ><i class="fa-solid fa-plus fa-xs"></i></button>
                                         <button class="minus" minus_1 data-content_id ="<?= $row['id']; ?>" style="padding: 0 0px 2px 0;">-</button>
@@ -54,10 +54,10 @@
                             </div>
                         </td>
                         <td totalPrice id ="total-<?= $row['id']; ?>">
-                            <?= $row['total_price'];?> 
+                            <?= $row['total_price']; ?> 
                         </td>
                         <td>
-                            <a href="" class="btn" delete-item  data-id = "<?= $row['id'] ;?>">
+                            <a href="" class="btn" delete-item  data-id = "<?= $row['id']; ?>">
                                 <i class="fa-solid fa-trash" style="color: #ff0000;"></i>
                             </a>
                         </td>
@@ -67,7 +67,7 @@
                 </tbody>
             </table>
         </div>
-        <?php if(mysqli_num_rows($result_show) >= 1){?>
+        <?php if (mysqli_num_rows($result_show) >= 1) { ?>
         <div>
             <div class='btns-pay'>
                 <div class="text-center" id="btn-pay">
@@ -79,7 +79,7 @@
                 </div>
                 <div class="text-center" id="btn-cash">
                     <a href="./Pay/cash" class='white ' >
-                            <button id="cash" class="btn btn-primary ">
+                            <button id="cash" data-id = 'cash' class="btn btn-primary ">
                             Cash Delevary
                         </button>
                         </a>
@@ -181,6 +181,30 @@
             })
         })
     </script>
-
+<!-- add pay cashing -->
+    <script>
+        $(document).ready(function(){
+            $('#cash').click(function(e){
+                e.preventDefault();
+                let id = $(this).data('id');
+                $.ajax({
+                    url:"./Pay/cashing.php",
+                    method:'post',
+                    
+                    data:{
+                        cashing: id
+                    },
+                    success: function(res){
+                        location.reload();
+                    },
+                    error: function(xhr,status,error){
+                        // console.log(xhr.responseText);
+                        // console.log(status);
+                        console.log('error');
+                    }
+                })
+            })
+        })
+    </script>
         </body>
         </html>

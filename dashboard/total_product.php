@@ -1,35 +1,33 @@
 <?php
 session_start();
-if($_SESSION['admin'] !== 'admin'){
+if ($_SESSION['admin'] !== 'admin') {
     header('Location:../index.php');
     exit();
-    }
-include('header.php');
-include('conect.php');
+}
+$heading = 'Products Management';
+include ('includes/header.php');
+include ('header.php');
+include ('conect.php');
 
-$query = "SELECT product_id, product_title, product_price, product_image1, status, created_at FROM products ORDER BY created_at DESC";
+$query = 'SELECT product_id, product_title, product_price, product_image1, status, created_at FROM products ORDER BY created_at DESC';
 $result = mysqli_query($con, $query);
 $total = mysqli_num_rows($result);
 ?>
 
-<div class="container mt-4">
-    <div class="mb-3">
-        <a href="javascript:history.back()" class="btn btn-sm btn-outline-secondary">
-            <i class="fa-solid fa-arrow-left"></i> Back
-        </a>
-    </div>
-    <?php include('navbar.php');?>
-    <div class="mb-4">
-        <div class="d-flex justify-content-between align-items-center">
-            <h2>Products Management</h2>
-            <div class="d-flex gap-2">
+
+<?php include ('navbar.php'); ?>
+<div class="mb-4">
+        <div class="d-flex justify-content-end align-items-center">
+            
+            <div class="d-flex gap-5">
                 <a href="management.php" class="btn btn-primary">+ Create Product</a>
-                <p class="badge bg-primary fs-6" id=count_product>Total:<?php echo $total;?></p>
+                <p  class="badge bg-primary fs-6" id=count_product>Total:<?php echo $total; ?></p>
             </div>
         </div>
         <hr class="my-3">
     </div>
-
+    <div class="container mt-4">
+    
     <div class="table-responsive">
         <table class="table table-striped table-hover align-middle">
             <thead class="table-dark">
@@ -45,12 +43,12 @@ $total = mysqli_num_rows($result);
                 </tr>
             </thead>
             <tbody>
-                <?php $counter= 1;?>
+                <?php $counter = 1; ?>
                 <?php if ($total > 0): ?>
                     <?php while ($row = mysqli_fetch_assoc($result)): ?>
                         <?php $status_class = ($row['status'] == 'active') ? 'bg-success' : 'bg-danger'; ?>
                         <tr>
-                            <td><?= $counter++?></td>
+                            <td><?= $counter++ ?></td>
                             <td><img src="../<?= $row['product_image1'] ?>" alt="Product" class="rounded" style="width: 50px; height: 50px; object-fit: cover;"></td>
                             <td><?= htmlspecialchars($row['product_title']) ?></td>
                             <td><?= $row['product_id'] ?></td>
@@ -58,8 +56,8 @@ $total = mysqli_num_rows($result);
                             <td><span class="badge <?= $status_class ?>"><?= ucfirst($row['status']) ?></span></td>
                             <td><?= date('M d, Y', strtotime($row['created_at'])) ?></td>
                             <td>
-                                <a href='management.php?product_id=<?=$row['product_id']?>'  data-id=<?=$row['product_id']?> class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
-                                <a href='' delete-item data-id=<?=$row['product_id']?>><button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></a>
+                                <a href='management.php?product_id=<?= $row['product_id'] ?>'  data-id=<?= $row['product_id'] ?> class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                                <a href='' delete-item data-id=<?= $row['product_id'] ?>><button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></a>
                             </td>
                         </tr>
                     <?php endwhile; ?>
@@ -104,4 +102,4 @@ $total = mysqli_num_rows($result);
     </script>
 
 
-<?php include('../includes/footer.php'); ?>
+<?php include ('includes/footer.php') ?>

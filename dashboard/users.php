@@ -4,8 +4,8 @@ if($_SESSION['admin'] !== 'admin'){
     header('Location:../index.php');
     exit();
     }
-
-include('../includes/header.php');
+$heading  = '';
+include('./includes/header.php');
 include('../includes/conect.php');
 
 $query = "SELECT username,email,status FROM register";
@@ -53,3 +53,4 @@ $result = mysqli_query($con,$query);
         </table>
     </div>
 </div>  
+<?php include('includes/footer.php')?>
