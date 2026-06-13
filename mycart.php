@@ -127,12 +127,12 @@ $result_show = mysqli_query($con, $query);
 
     <!-- add plus(1) count in the cart -->
     <script>
-        $(document).ready(function (){
+        $(document).ready(function () {
             $(document).on('click','[add_1]',function(){
                 let contentId = $(this).data('content_id');
                 // console.log(this);
                 $.ajax({
-                    url:"add_minus_from_cart.php",
+                    url: root_path + "requests/add_minus_from_cart.php",
                     method:"post",
                     dataType:'json',
                     data:{
@@ -144,13 +144,14 @@ $result_show = mysqli_query($con, $query);
                         $('#count').text(res.total_row_count)
                         $('#total-price').text(res.total_row_price)
                     },
-                    error:function(){
-                        console.log("error")
+                    error:function(error){
+                        console.log(error)
                     }
                 })
             })
         })
     </script>
+
 <!-- minus (1) count in the cart  -->
     <script>
         $(document).ready(function (){
@@ -158,7 +159,7 @@ $result_show = mysqli_query($con, $query);
                 let contentId = $(this).data('content_id');
                 // if($(`#add-${contentId}`).text() == 1) return;
                 $.ajax({
-                    url:"add_minus_from_cart.php",
+                    url: root_path + "requests/add_minus_from_cart.php",
                     method:"post",
                     dataType:'json',
                     data:{
@@ -166,21 +167,19 @@ $result_show = mysqli_query($con, $query);
                     },
                     success:function(res){
                         console.log('success')
-                        
-
-                        
                         $(`#add-${contentId}`).text(res.count);
                         $(`#total-${contentId}`).text(res.total_price);
                         $('#count').text(res.total_row_count)
                         $('#total-price').text(res.total_row_price)
                     },
-                    error:function(){
-                        console.log("error")
+                    error:function(error){
+                        console.log(error)
                     }
                 })
             })
         })
     </script>
+
 <!-- add pay cashing -->
     <script>
         $(document).ready(function(){
@@ -198,13 +197,11 @@ $result_show = mysqli_query($con, $query);
                         location.reload();
                     },
                     error: function(xhr,status,error){
-                        // console.log(xhr.responseText);
-                        // console.log(status);
-                        console.log('error');
+                        console.log(xhr,status,error);
                     }
                 })
             })
         })
     </script>
-        </body>
-        </html>
+</body>
+</html>

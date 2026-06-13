@@ -3,13 +3,8 @@ if (!isset($page_title)) {
     $page_title = 'Gleam - creats - Home';
 }
 
-
-
-// var_dump(basename(__FILE__));
-
+include( dirname(__DIR__, 1) . '/config.php');
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +17,9 @@ if (!isset($page_title)) {
     <link rel="stylesheet" href="assets/css/all.min.css">
     <link rel="stylesheet" href="assets/css/mystyle.css">
     <script src="assets/js/jquery.min.js"></script>
+    <script>
+        let root_path = "<?=$root_path ?? ''?>";
+    </script>
 
     <title><?php echo htmlspecialchars($page_title); ?></title>
 </head>

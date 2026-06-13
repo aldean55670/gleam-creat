@@ -10,7 +10,6 @@ $resultUsers = mysqli_query($con," SELECT COUNT(*) as totalUsers FROM  register"
 $resultProducts = mysqli_query($con," SELECT COUNT(*) totalProducts FROM  products");
 $users = mysqli_fetch_assoc($resultUsers)['totalUsers'];
 $orders = mysqli_fetch_assoc($resultOrders)['totalOrder'];
-
 $products = mysqli_fetch_assoc($resultProducts)['totalProducts'];
 
 ?>

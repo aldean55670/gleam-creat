@@ -13,7 +13,6 @@ $result = mysqli_query($con, $query);
 
 $data = [];
 $counter = 0;
-$secretKey = $_ENV['STRIPE_SECRET_KEY'];
 
 while ($row = mysqli_fetch_assoc($result)) {
     $data["line_items[$counter][price_data][currency]"] = 'usd';

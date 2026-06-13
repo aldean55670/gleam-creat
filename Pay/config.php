@@ -1,7 +1,2 @@
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
-
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-
-$secretKey = $_ENV['STRIPE_SECRET_KEY'];
+$secretKey = 'sk_test_51TY1KfDQCww1ZfUpchsWwCPBBxMCQmlUZMnbUij8pPGV6oOBmPYBANtBOrq98rUBeMTZM4GpjQf2FXDErOXwYwfz00Zj0sf1gf';

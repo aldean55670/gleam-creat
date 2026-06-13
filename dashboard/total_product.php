@@ -14,8 +14,6 @@ $result = mysqli_query($con, $query);
 $total = mysqli_num_rows($result);
 ?>
 
-
-<?php include ('navbar.php'); ?>
 <div class="mb-4">
         <div class="d-flex justify-content-end align-items-center">
             

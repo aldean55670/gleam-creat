@@ -13,7 +13,6 @@ if (!$_SESSION['username']) {
 }
 $username = $_SESSION['username'];
 $session_id = $_GET['session_id'];
-$secretKey = $_ENV['STRIPE_SECRET_KEY'];
 
 $init = curl_init();
 curl_setopt($init, CURLOPT_URL, 'https://api.stripe.com/v1/checkout/sessions/' . $session_id);
