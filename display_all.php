@@ -54,7 +54,7 @@
                         <div class="toast-container position-fixed bottom-0 end-0 p-3">
                             <div id="liveToast" role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="alert alert-success d-flex justify-content-between gap-3">
-                                    <div>${data.result_chick.message}</div>
+                                    <div>${data.message}</div>
                                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                                 </div>
                             </div>
@@ -73,7 +73,7 @@
                         <div class="toast-container position-fixed bottom-0 end-0 p-3">
                             <div id="liveToast" role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="alert alert-danger d-flex justify-content-between gap-3">
-                                    <div>${error.result_chick.message}</div>
+                                    <div>${error.message}</div>
                                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                                 </div>
                             </div>
