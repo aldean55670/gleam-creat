@@ -29,7 +29,7 @@ curl_setopt($init, CURLOPT_URL, 'https://api.stripe.com/v1/checkout/sessions');
 curl_setopt($init, CURLOPT_POST, true);
 curl_setopt($init, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($init, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($init, CURLOPT_USERPWD, $secretKey . ':');
+// curl_setopt($init, CURLOPT_USERPWD, $secretKey . ':');
 curl_setopt($init, CURLOPT_POSTFIELDS, http_build_query($data));
 curl_setopt($init, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($init, CURLOPT_SSL_VERIFYHOST, false);

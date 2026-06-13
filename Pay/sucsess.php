@@ -17,7 +17,7 @@ $session_id = $_GET['session_id'];
 $init = curl_init();
 curl_setopt($init, CURLOPT_URL, 'https://api.stripe.com/v1/checkout/sessions/' . $session_id);
 curl_setopt($init, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($init, CURLOPT_USERPWD, $secretKey . ':');
+// curl_setopt($init, CURLOPT_USERPWD, $secretKey . ':');
 curl_setopt($init, CURLOPT_SSL_VERIFYPEER, false);
 
 $response = curl_exec($init);
